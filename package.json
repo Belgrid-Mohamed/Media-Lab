@@ -1,0 +1,38 @@
+{
+  "name": "mb-media-downloader-v2",
+  "version": "1.0.0",
+  "description": "Desktop media downloader built with Electron and yt-dlp",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "keywords": [
+    "electron",
+    "yt-dlp",
+    "downloader",
+    "ffmpeg"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^30.5.1"
+  },
+  "type": "commonjs",
+  "build": {
+    "appId": "com.mbmediadownloader.app",
+    "productName": "MB Media Downloader",
+    "files": [
+      "**/*",
+      "!bin/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "pkg",
+      "category": "public.app-category.utilities"
+    }
+  }
+}

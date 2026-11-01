@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Downloads - MB Media Downloader</title>
+    <link rel="stylesheet" href="../../Assets/styles.css" />
+  </head>
+  <body>
+    <!-- Hidden File Input for Importing Links -->
+    <input
+      type="file"
+      id="importFileInput"
+      accept=".txt,.json"
+      class="hidden"
+    />
+
+    <div class="app-container">
+      <!-- HEADER TITLEBAR -->
+      <header class="app-header">
+        <div class="header-menu-left">
+          <div class="menu-dropdown-wrapper">
+            <button data-i18n type="button" class="header-menu-btn" id="menuFileBtn">
+              File
+            </button>
+            <div class="header-dropdown-menu hidden" id="fileDropdown">
+              <div data-i18n class="dropdown-item" id="fileImport">Import Links List</div>
+              <div data-i18n class="dropdown-item" id="fileExport">
+                Export Downloads List
+              </div>
+              <div class="dropdown-divider"></div>
+              <div data-i18n class="dropdown-item" id="fileExit">Exit</div>
+            </div>
+          </div>
+
+          <div class="menu-dropdown-wrapper">
+            <button data-i18n
+              type="button"
+              class="header-menu-btn active"
+              id="menuDownloadsBtn"
+            >
+              Downloads
+            </button>
+          </div>
+
+          <div class="menu-dropdown-wrapper">
+            <button data-i18n type="button" class="header-menu-btn" id="menuToolsBtn">
+              Tools
+            </button>
+            <div class="header-dropdown-menu hidden" id="toolsDropdown">
+              <div class="dropdown-item disabled" id="toolExtension">
+                <span data-i18n>Browser Extension</span>
+                <span data-i18n class="menu-tag-soon">Soon</span>
+              </div>
+              <div class="dropdown-item disabled" id="toolConverter">
+                <span data-i18n>File Converter</span>
+                <span data-i18n class="menu-tag-soon">Soon</span>
+              </div>
+              <div class="dropdown-item disabled" id="toolAudioSeparator">
+                <span data-i18n>Separate Audio from Video</span>
+                <span data-i18n class="menu-tag-soon">Soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-dropdown-wrapper">
+            <button data-i18n
+              type="button"
+              class="header-menu-btn"
+              id="openSettingsModalBtn"
+            >
+              Settings
+            </button>
+          </div>
+
+          <div class="menu-dropdown-wrapper">
+            <button data-i18n type="button" class="header-menu-btn" id="helpDropdownBtn">
+              Help
+            </button>
+            <div class="header-dropdown-menu hidden" id="helpDropdown">
+              <div data-i18n class="dropdown-item" id="helpDocs">Documentation</div>
+              <div data-i18n class="dropdown-item" id="helpTutorials">Tutorials</div>
+              <div data-i18n class="dropdown-item" id="helpSupport">Contact Support</div>
+              <div data-i18n class="dropdown-item" id="helpFeedback">Feedback</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-actions-right">
+          <div class="window-controls">
+            <button data-i18n-attrs="title"
+              type="button"
+              id="winTray"
+              class="win-btn win-btn-tray"
+              title="Minimize to Tray"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M12 3v10m0 0l-3-3m3 3l3-3" />
+                <rect x="3" y="15" width="18" height="6" rx="2" />
+              </svg>
+            </button>
+            <button data-i18n-attrs="title"
+              type="button"
+              id="winMinimize"
+              class="win-btn win-btn-minimize"
+              title="Minimize"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="3" y1="12" x2="21" y2="12" />
+              </svg>
+            </button>
+            <button data-i18n-attrs="title"
+              type="button"
+              id="winMaximize"
+              class="win-btn win-btn-maximize"
+              title="Maximize"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+              </svg>
+            </button>
+            <button data-i18n-attrs="title"
+              type="button"
+              id="winClose"
+              class="win-btn win-btn-close"
+              title="Close"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="4" y1="4" x2="20" y2="20" />
+                <line x1="4" y1="20" x2="20" y2="4" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- MAIN WORKSPACE -->
+      <main class="downloads-main">
+        <!-- 1. CENTERED CAPSULE URL DOWNLOAD BAR -->
+        <div class="url-capsule-bar">
+          <svg
+            class="url-input-icon"
+            id="urlLinkIcon"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+            />
+            <path
+              d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+            />
+          </svg>
+          <!-- PLAYLIST BUTTON: takes the place of the link icon once a link is pasted -->
+          <div
+            class="capsule-popover-wrapper playlist-peek-wrapper hidden"
+            id="playlistPeekWrapper"
+          >
+            <button data-i18n-attrs="title"
+              type="button"
+              class="playlist-peek-btn"
+              id="btnExplorePlaylist"
+              title="Explore playlist"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 4v16M8.5 7v13M13 7v13M17 5.5l3.5 13.5" />
+              </svg>
+              <span class="playlist-peek-badge" id="playlistPeekBadge">1</span>
+            </button>
+
+            <!-- PLAYLIST POPOVER (content is drawn by downloads-script.js) -->
+            <div data-i18n-attrs="aria-label"
+              class="popover-panel popover-playlist hidden"
+              id="playlistPopover"
+              role="dialog"
+              aria-label="Playlist videos"
+            >
+              <div class="popover-caret"></div>
+              <div id="playlistPopoverView"></div>
+            </div>
+          </div>
+          <input data-i18n-attrs="placeholder"
+            type="text"
+            id="urlInput"
+            class="url-text-input"
+            placeholder="Paste a url and press enter to download!"
+            autocomplete="off"
+          />
+
+          <div class="url-bar-actions">
+            <!-- 1. TRIM TOGGLE & POPOVER WRAPPER -->
+            <div class="capsule-popover-wrapper">
+              <button data-i18n-attrs="title"
+                type="button"
+                class="capsule-icon-btn"
+                id="btnToggleCut"
+                title="Trim before downloading"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                >
+                  <circle cx="6" cy="6" r="3" />
+                  <circle cx="6" cy="18" r="3" />
+                  <line x1="20" y1="4" x2="8.12" y2="15.88" />
+                  <line x1="14.47" y1="14.48" x2="20" y2="20" />
+                  <line x1="8.12" y1="8.12" x2="12" y2="12" />
+                </svg>
+              </button>
+
+              <!-- TRIM POPOVER: preview player, timeline, chapters -->
+              <div class="popover-panel popover-trim hidden" id="trimPopover">
+                <div class="popover-caret caret-center"></div>
+                <div class="popover-header">
+                  <h4 data-i18n class="popover-title">Trim before downloading</h4>
+                  <button data-i18n-attrs="aria-label"
+                    type="button"
+                    class="popover-close-btn"
+                    id="closeTrimPopoverBtn"
+                    aria-label="Close"
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                </div>
+
+                <div class="trim-body">
+                  <!-- LEFT: player + timeline -->
+                  <div class="trim-main">
+                    <div class="trim-preview" id="trimPreview">
+                      <div
+                        class="trim-preview-thumb"
+                        id="trimPreviewThumb"
+                      ></div>
+                      <div
+                        class="trim-preview-frame"
+                        id="trimPreviewFrame"
+                      ></div>
+                      <video
+                        class="trim-video"
+                        id="trimVideo"
+                        playsinline
+                        preload="metadata"
+                      ></video>
+                      <div class="trim-preview-note" id="trimPreviewNote"></div>
+                      <button data-i18n-attrs="aria-label"
+                        type="button"
+                        class="trim-play-btn hidden"
+                        id="trimPlayBtn"
+                        aria-label="Play preview"
+                      >
+                        <svg
+                          class="icon-play"
+                          width="15"
+                          height="15"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                        <svg
+                          class="icon-pause"
+                          width="15"
+                          height="15"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M7 5h4v14H7zM13 5h4v14h-4z" />
+                        </svg>
+                      </button>
+                    </div>
+
+                    <div class="trim-timeline" id="trimSlider">
+                      <div class="trim-filmstrip" id="trimFilmstrip"></div>
+                      <div
+                        class="trim-shade trim-shade-left"
+                        id="trimShadeLeft"
+                      ></div>
+                      <div
+                        class="trim-shade trim-shade-right"
+                        id="trimShadeRight"
+                      ></div>
+                      <div class="trim-range" id="trimRange">
+                        <button data-i18n-attrs="aria-label"
+                          type="button"
+                          class="trim-handle trim-handle-start"
+                          id="trimHandleStart"
+                          role="slider"
+                          aria-label="Trim start"
+                        ></button>
+                        <button data-i18n-attrs="aria-label"
+                          type="button"
+                          class="trim-handle trim-handle-end"
+                          id="trimHandleEnd"
+                          role="slider"
+                          aria-label="Trim end"
+                        ></button>
+                      </div>
+                    </div>
+                    <div class="trim-time-labels">
+                      <span id="trimMinLabel">00:00</span>
+                      <span id="trimMaxLabel">00:00</span>
+                    </div>
+                  </div>
+
+                  <!-- RIGHT: chapters, start / end, clip length, buttons -->
+                  <div class="trim-side">
+                    <div class="trim-section-group" id="trimChaptersSection">
+                      <label data-i18n class="trim-section-label">Chapters</label>
+                      <div
+                        class="trim-chapter-list"
+                        id="chaptersPillList"
+                      ></div>
+                    </div>
+
+                    <div class="trim-inputs-row">
+                      <div class="trim-field-group">
+                        <label data-i18n class="trim-field-label" for="trimStartInput"
+                          >Start</label
+                        >
+                        <input
+                          type="text"
+                          id="trimStartInput"
+                          class="trim-time-input"
+                          value="00:00"
+                          autocomplete="off"
+                        />
+                      </div>
+                      <div class="trim-field-group">
+                        <label data-i18n class="trim-field-label" for="trimEndInput"
+                          >End</label
+                        >
+                        <input
+                          type="text"
+                          id="trimEndInput"
+                          class="trim-time-input"
+                          value="00:00"
+                          autocomplete="off"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="trim-meta-row">
+                      <span data-i18n class="trim-meta-label">Clip length</span>
+                      <span class="trim-meta-value" id="trimClipLengthText"
+                        >00:00</span
+                      >
+                    </div>
+
+                    <div class="trim-actions">
+                      <button data-i18n
+                        type="button"
+                        class="btn-popover-ghost"
+                        id="trimResetBtn"
+                      >
+                        Reset
+                      </button>
+                      <button data-i18n
+                        type="button"
+                        class="btn-popover-primary"
+                        id="trimDoneBtn"
+                      >
+                        Done
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chapters toggle -->
+            <button data-i18n-attrs="title"
+              type="button"
+              class="capsule-icon-btn active"
+              id="btnToggleChapters"
+              title="Embed Chapters"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <rect
+                  x="3"
+                  y="3"
+                  width="18"
+                  height="18"
+                  rx="5"
+                  fill="currentColor"
+                />
+                <line
+                  x1="7"
+                  y1="12"
+                  x2="17"
+                  y2="12"
+                  stroke="#111218"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="10"
+                  y1="9"
+                  x2="10"
+                  y2="15"
+                  stroke="#111218"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="14"
+                  y1="9"
+                  x2="14"
+                  y2="15"
+                  stroke="#111218"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+
+            <!-- Subtitles toggle -->
+            <button data-i18n-attrs="title"
+              type="button"
+              class="capsule-icon-btn active"
+              id="btnToggleSubtitles"
+              title="Embed Subtitles"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect
+                  x="3"
+                  y="4"
+                  width="18"
+                  height="16"
+                  rx="4"
+                  fill="currentColor"
+                />
+                <line
+                  x1="7"
+                  y1="10"
+                  x2="13"
+                  y2="10"
+                  stroke="#111218"
+                  stroke-width="2"
+                />
+                <line
+                  x1="7"
+                  y1="14"
+                  x2="17"
+                  y2="14"
+                  stroke="#111218"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+
+            <!-- 2. FORMAT & QUALITY PILL & POPOVER WRAPPER -->
+            <div class="capsule-popover-wrapper">
+              <button
+                type="button"
+                class="custom-select-trigger capsule-select-trigger"
+                id="quickFormatQualityBtn"
+              >
+                <span id="quickFormatQualityLabel">MP4 · 1080p</span>
+              </button>
+
+              <!-- FORMAT & QUALITY POPOVER PANEL -->
+              <div
+                class="popover-panel popover-format-quality hidden"
+                id="formatQualityPopover"
+              >
+                <div class="popover-caret caret-right"></div>
+                <div class="popover-body">
+                  <!-- FORMAT SECTION -->
+                  <div class="fq-section">
+                    <label class="fq-section-title">FORMAT</label>
+                    <div class="format-pills-row" id="formatPillGroup">
+                      <button
+                        type="button"
+                        class="format-pill active"
+                        data-format="MP4"
+                      >
+                        MP4
+                      </button>
+                      <button
+                        type="button"
+                        class="format-pill"
+                        data-format="MKV"
+                      >
+                        MKV
+                      </button>
+                      <button
+                        type="button"
+                        class="format-pill"
+                        data-format="WEBM"
+                      >
+                        WEBM
+                      </button>
+                      <button
+                        type="button"
+                        class="format-pill"
+                        data-format="MP3"
+                      >
+                        MP3
+                      </button>
+                      <button
+                        type="button"
+                        class="format-pill"
+                        data-format="M4A"
+                      >
+                        M4A
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- QUALITY SECTION -->
+                  <div class="fq-section">
+                    <label class="fq-section-title">QUALITY</label>
+                    <div class="quality-options-list" id="qualityOptionsList">
+                      <!-- Rendered dynamically by JavaScript -->
+                    </div>
+                  </div>
+
+                  <div class="fq-divider"></div>
+                  <p data-i18n class="fq-size-note">
+                    Based on the streams listed for this video. The final file
+                    can differ a little.
+                  </p>
+
+                  <div class="fq-default-row">
+                    <button data-i18n
+                      type="button"
+                      class="btn-link-orange"
+                      id="btnMakeDefaultFormat"
+                    >
+                      Make this my default &rsaquo;
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Circle Download Action Button -->
+            <button data-i18n-attrs="title"
+              type="button"
+              id="downloadBtn"
+              class="btn-download-circle"
+              title="Start Download"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <line x1="12" y1="4" x2="12" y2="15" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="5" y1="19" x2="19" y2="19" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. TOOLBAR ROW -->
+        <div class="toolbar-row">
+          <div class="toolbar-right-controls">
+            <div class="search-form-wrapper">
+              <svg
+                class="search-icon"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input data-i18n-attrs="placeholder"
+                type="text"
+                id="queueSearchInput"
+                class="search-input"
+                placeholder="Search downloads..."
+                autocomplete="off"
+              />
+            </div>
+
+            <button data-i18n-attrs="title"
+              type="button"
+              class="btn-tool-action active"
+              id="togglePlaylistViewBtn"
+              title="Toggle playlist panel"
+            >
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <line x1="15" y1="3" x2="15" y2="21" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. WORKSPACE SPLIT -->
+        <div class="queue-and-sidebar-workspace">
+          <!-- LEFT COLUMN: QUEUE LIST -->
+          <div class="queue-section">
+            <div class="queue-info-row" id="queueInfoRow">
+              <span class="queue-info-text" id="queueCounterText"
+                >0 items in queue</span
+              >
+              <button
+                type="button"
+                class="btn-link-orange"
+                id="toggleSelectAllBtn"
+              >
+                <span id="selectedCounterText">0 selected</span>
+              </button>
+            </div>
+
+            <div class="queue-container mode-card" id="queueContainer">
+              <div class="queue-scroll-list" id="queueList"></div>
+              <div id="emptyQueueState" class="empty-state">
+                <div class="empty-icon-circle">
+                  <svg
+                    width="26"
+                    height="26"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
+                    <path
+                      d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"
+                    />
+                  </svg>
+                </div>
+                <p data-i18n class="empty-title">No downloads in queue</p>
+                <p data-i18n class="empty-subtitle">
+                  Paste a video or playlist URL above to start downloading
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: PLAYLIST SIDEBAR PANEL -->
+          <aside
+            class="full-playlist-view-container hidden"
+            id="playlistViewContainer"
+          >
+            <div id="playlistPanelView"></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+    <script defer src="../../Assets/i18n.js"></script>
+    <script defer src="downloads-scripts/core.js"></script>
+    <script defer src="downloads-scripts/queue-scripts.js"></script>
+    <script defer src="downloads-scripts/trim-engine.js"></script>
+    <script defer src="downloads-scripts/video-player.js"></script>
+    <script defer src="downloads-scripts/playlist-explorer.js"></script>
+  </body>
+</html>

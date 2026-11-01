@@ -1,0 +1,540 @@
+<div
+  class="settings-modal-container"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="settingsModalTitle"
+>
+  <header class="settings-modal-header">
+    <div class="modal-title-breadcrumb">
+      <span data-i18n id="settingsModalTitle">Settings</span>
+    </div>
+    <button data-i18n-attrs="title aria-label"
+      class="modal-close-btn"
+      id="closeSettingsModalBtn"
+      type="button"
+      title="Close Settings"
+      aria-label="Close settings"
+    >
+      ✕
+    </button>
+  </header>
+
+  <div class="settings-modal-body">
+    <aside data-i18n-attrs="aria-label" class="settings-sidebar-nav" aria-label="Settings categories">
+      <button data-i18n type="button" class="sidebar-item-btn active" data-tab="general">
+        General
+      </button>
+      <button data-i18n type="button" class="sidebar-item-btn" data-tab="downloads">
+        Downloads
+      </button>
+      <button data-i18n type="button" class="sidebar-item-btn" data-tab="metadata">
+        Metadata
+      </button>
+      <button data-i18n type="button" class="sidebar-item-btn" data-tab="network">
+        Network &amp; Access
+      </button>
+      <button data-i18n type="button" class="sidebar-item-btn" data-tab="advanced">
+        Advanced
+      </button>
+      <button data-i18n type="button" class="sidebar-item-btn" data-tab="importexport">
+        Import &amp; Export
+      </button>
+      <button data-i18n type="button" class="sidebar-item-btn" data-tab="extensions">
+        Manage extensions
+      </button>
+      <button data-i18n type="button" class="sidebar-item-btn" data-tab="hotkeys">
+        Hotkeys
+      </button>
+      <button data-i18n type="button" class="sidebar-item-btn" data-tab="about">
+        About
+      </button>
+    </aside>
+
+    <section class="settings-tab-content">
+
+      <!-- GENERAL TAB -->
+      <div id="tab-general" class="settings-section-panel active">
+        <div class="settings-group-card">
+          <div class="option-row">
+            <div>
+              <p data-i18n class="option-title">Language</p>
+              <p data-i18n class="option-subtitle">Set the language used throughout the app.</p>
+            </div>
+            <div class="custom-select-wrapper" id="prefLanguageWrapper">
+              <button type="button" class="custom-select-trigger" id="prefLanguageBtn">
+                <span id="prefLanguageLabel">English</span>
+                <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="custom-select-menu hidden" id="prefLanguageMenu">
+                <div class="custom-select-option selected" data-value="en">English</div>
+                <div class="custom-select-option" data-value="es">Español</div>
+                <div class="custom-select-option" data-value="fr">Français</div>
+                <div class="custom-select-option" data-value="de">Deutsch</div>
+                <div class="custom-select-option" data-value="pt">Português</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefTheme">Appearance Theme</p>
+              <p data-i18n class="option-subtitle">Choose your preferred appearance theme.</p>
+            </div>
+            <div class="theme-toggle" id="prefThemeToggle" role="radiogroup" aria-labelledby="lbl-prefTheme"><button data-i18n-attrs="title" type="button" class="theme-opt" data-value="system" role="radio" aria-checked="false" title="System"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2.5"/><path d="M8.5 20h7M12 16v4"/></svg><span data-i18n class="theme-opt-label">System</span></button><button data-i18n-attrs="title" type="button" class="theme-opt active" data-value="dark" role="radio" aria-checked="true" title="Dark"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg><span data-i18n class="theme-opt-label">Dark</span></button><button data-i18n-attrs="title" type="button" class="theme-opt" data-value="light" role="radio" aria-checked="false" title="Light"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg><span data-i18n class="theme-opt-label">Light</span></button></div>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefRememberWinSize">Remember Window Size and Position</p>
+              <p data-i18n class="option-subtitle">Restores the window to its previous size and position when reopening the app.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefRememberWinSize" aria-labelledby="lbl-prefRememberWinSize" class="switch-input" checked />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefPreventSleep">Prevent System Sleep</p>
+              <p data-i18n class="option-subtitle">Keeps the system awake until all running downloads are completed.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefPreventSleep" aria-labelledby="lbl-prefPreventSleep" class="switch-input" />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefMinimizeToTray">Minimize to Tray on Close</p>
+              <p data-i18n class="option-subtitle">Keeps the app running in background and minimizes to tray.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefMinimizeToTray" aria-labelledby="lbl-prefMinimizeToTray" class="switch-input" />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefStartMinimized">Start Minimized to Tray at Login</p>
+              <p data-i18n class="option-subtitle">Automatically launch in the system tray when you sign in.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefStartMinimized" aria-labelledby="lbl-prefStartMinimized" class="switch-input" />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefAutoUpdate">Automatically download new updates</p>
+              <p data-i18n class="option-subtitle">Downloads new versions of the app and its download engine in the background.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefAutoUpdate" aria-labelledby="lbl-prefAutoUpdate" class="switch-input" checked />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title">Reset Settings</p>
+              <p data-i18n class="option-subtitle">Restore all settings to their default values.</p>
+            </div>
+            <button data-i18n type="button" id="resetSettingsBtn" class="btn-danger-action">Reset Settings</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOWNLOADS TAB -->
+      <div id="tab-downloads" class="settings-section-panel">
+        <div class="settings-group-card">
+          <div class="option-row directory-option-row">
+            <div class="directory-full-container">
+              <p data-i18n class="option-title">Download Directory</p>
+              <p data-i18n class="option-subtitle">Choose where downloaded files are saved.</p>
+              <div class="directory-input-row">
+                <div class="directory-path-display" id="modalCurrentDirText">Calculating...</div>
+                <button type="button" id="browseDirBtn" class="btn-browse">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /></svg>
+                  <span data-i18n>Browse</span>
+                </button>
+              </div>
+              <div class="directory-meta-row">
+                <span class="storage-info-text">Available Storage: <strong id="modalAvailableStorageText">…</strong></span>
+                <button data-i18n type="button" id="openDirBtn" class="btn-link-orange">Open folder</button>
+              </div>
+              <label class="check-row" for="prefAlwaysAskDir">
+                <input type="checkbox" id="prefAlwaysAskDir" class="check-input" />
+                <span data-i18n>Always ask before downloading</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title">Default Download Type</p>
+              <p data-i18n class="option-subtitle">Set the default downloads type.</p>
+            </div>
+            <div class="custom-select-wrapper" id="prefDefaultTypeWrapper">
+              <button type="button" class="custom-select-trigger" id="prefDefaultTypeBtn">
+                <span id="prefDefaultTypeLabel">Video</span>
+                <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="custom-select-menu hidden" id="prefDefaultTypeMenu">
+                <div class="custom-select-option selected" data-value="video">Video</div>
+                <div class="custom-select-option" data-value="audio">Audio</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title">Default Format &amp; Quality</p>
+              <p data-i18n class="option-subtitle">Choose your preferred video format and resolution.</p>
+            </div>
+            <div class="inline-selects-group"><div class="custom-select-wrapper" id="prefVideoFormatWrapper">
+              <button type="button" class="custom-select-trigger" id="prefVideoFormatBtn">
+                <span id="prefVideoFormatLabel">MP4</span>
+                <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="custom-select-menu hidden" id="prefVideoFormatMenu">
+                <div class="custom-select-option selected" data-value="MP4">MP4</div>
+                <div class="custom-select-option" data-value="MKV">MKV</div>
+                <div class="custom-select-option" data-value="MOV">MOV</div>
+                <div class="custom-select-option" data-value="WebM">WebM</div>
+              </div>
+            </div><div class="custom-select-wrapper" id="prefVideoQualityWrapper">
+              <button type="button" class="custom-select-trigger" id="prefVideoQualityBtn">
+                <span id="prefVideoQualityLabel"><span class="q-name">1080p</span> <span class="q-badge">Full HD</span></span>
+                <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="custom-select-menu hidden" id="prefVideoQualityMenu">
+                <div class="custom-select-option" data-value="4320p"><span class="q-name">4320p</span> <span class="q-badge">8K</span></div>
+                <div class="custom-select-option" data-value="2160p"><span class="q-name">2160p</span> <span class="q-badge">4K</span></div>
+                <div class="custom-select-option" data-value="1440p"><span class="q-name">1440p</span> <span class="q-badge">2K</span></div>
+                <div class="custom-select-option selected" data-value="1080p"><span class="q-name">1080p</span> <span class="q-badge">Full HD</span></div>
+                <div class="custom-select-option" data-value="720p"><span class="q-name">720p</span> <span class="q-badge">HD</span></div>
+                <div class="custom-select-option" data-value="480p"><span class="q-name">480p</span> <span class="q-badge">SD</span></div>
+                <div class="custom-select-option" data-value="360p"><span class="q-name">360p</span> <span class="q-badge">SD</span></div>
+                <div class="custom-select-option" data-value="240p"><span class="q-name">240p</span> <span class="q-badge">SD</span></div>
+                <div class="custom-select-option" data-value="144p"><span class="q-name">144p</span> <span class="q-badge">SD</span></div>
+              </div>
+            </div></div>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title">Default Audio Format &amp; Quality</p>
+              <p data-i18n class="option-subtitle">Choose your preferred audio format and quality.</p>
+            </div>
+            <div class="inline-selects-group"><div class="custom-select-wrapper" id="prefAudioFormatWrapper">
+              <button type="button" class="custom-select-trigger" id="prefAudioFormatBtn">
+                <span id="prefAudioFormatLabel">MP3</span>
+                <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="custom-select-menu hidden" id="prefAudioFormatMenu">
+                <div class="custom-select-option selected" data-value="MP3">MP3</div>
+                <div class="custom-select-option" data-value="M4A">M4A</div>
+              </div>
+            </div><div class="custom-select-wrapper" id="prefAudioQualityWrapper">
+              <button type="button" class="custom-select-trigger" id="prefAudioQualityBtn">
+                <span id="prefAudioQualityLabel"><span class="q-name">320 kbps</span> <span class="q-badge">Ultra High</span></span>
+                <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="custom-select-menu hidden" id="prefAudioQualityMenu">
+                <div class="custom-select-option selected" data-value="320k"><span class="q-name">320 kbps</span> <span class="q-badge">Ultra High</span></div>
+                <div class="custom-select-option" data-value="256k"><span class="q-name">256 kbps</span> <span class="q-badge">High Quality</span></div>
+                <div class="custom-select-option" data-value="192k"><span class="q-name">192 kbps</span> <span class="q-badge">Standard</span></div>
+                <div class="custom-select-option" data-value="128k"><span class="q-name">128 kbps</span> <span class="q-badge">Compact</span></div>
+              </div>
+            </div></div>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefMaxConcurrent">Max Concurrent Downloads</p>
+              <p data-i18n class="option-subtitle">Maximum number of parallel active tasks.</p>
+            </div>
+            <div class="range-wrapper">
+              <input type="range" id="prefMaxConcurrent" aria-labelledby="lbl-prefMaxConcurrent" min="1" max="10" value="3" class="range-input" />
+              <span id="maxTasksBadge" class="range-badge">3 Tasks</span>
+            </div>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefAutoRetry">Auto Retry Failed Downloads</p>
+              <p data-i18n class="option-subtitle">Retry automatically on network drops.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefAutoRetry" aria-labelledby="lbl-prefAutoRetry" class="switch-input" checked />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="option-row bordered sub-row" data-requires="prefAutoRetry">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefMaxRetries">Max Retry Attempts</p>
+              <p data-i18n class="option-subtitle">Maximum number of retries before sending to failed.</p>
+            </div>
+            <input type="number" id="prefMaxRetries" aria-labelledby="lbl-prefMaxRetries" min="1" max="10" value="3" class="number-input" />
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title">Duplicate files handling</p>
+              <p data-i18n class="option-subtitle">Choose how to handle files that already exist in the download directory.</p>
+            </div>
+            <div class="custom-select-wrapper" id="prefDuplicateHandlingWrapper">
+              <button type="button" class="custom-select-trigger" id="prefDuplicateHandlingBtn">
+                <span id="prefDuplicateHandlingLabel">Ask</span>
+                <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="custom-select-menu hidden" id="prefDuplicateHandlingMenu">
+                <div class="custom-select-option" data-value="rename">Rename</div>
+                <div class="custom-select-option" data-value="skip">Skip</div>
+                <div class="custom-select-option" data-value="overwrite">Overwrite</div>
+                <div class="custom-select-option selected" data-value="ask">Ask</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefAutoDetect">Smart Clipboard Monitor</p>
+              <p data-i18n class="option-subtitle">Automatically detects and pastes supported video links from clipboard.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefAutoDetect" aria-labelledby="lbl-prefAutoDetect" class="switch-input" checked />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="option-row bordered sub-row" data-requires="prefAutoDetect">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefAutoDownloadCopied">Auto Download Copied Links</p>
+              <p data-i18n class="option-subtitle">Automatically starts downloading copied links using your default settings.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefAutoDownloadCopied" aria-labelledby="lbl-prefAutoDownloadCopied" class="switch-input" />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="option-row bordered sub-row" data-requires="prefAutoDetect">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefRestrictPlatforms">Restrict for Specific Platforms</p>
+              <p data-i18n class="option-subtitle">Monitor links from selected platforms only.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefRestrictPlatforms" aria-labelledby="lbl-prefRestrictPlatforms" class="switch-input" />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefPlaylistSubfolder">Create Playlist Folders</p>
+              <p data-i18n class="option-subtitle">Saves playlist and channel files inside a dedicated folder named after their title.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefPlaylistSubfolder" aria-labelledby="lbl-prefPlaylistSubfolder" class="switch-input" checked />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefTrackPrefix">Playlist Index Prefixing</p>
+              <p data-i18n class="option-subtitle">Numerates playlist and channel file names based on their YouTube order.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefTrackPrefix" aria-labelledby="lbl-prefTrackPrefix" class="switch-input" />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefGroupPlaylist">Group Playlist Files in Queue</p>
+              <p data-i18n class="option-subtitle">Displays each playlist’s downloads in a dedicated group to keep the download list organized.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefGroupPlaylist" aria-labelledby="lbl-prefGroupPlaylist" class="switch-input" />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- METADATA TAB -->
+      <div id="tab-metadata" class="settings-section-panel">
+        <div class="settings-group-card">
+          <div class="option-row">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefChapters">Embed Chapters</p>
+              <p data-i18n class="option-subtitle">Includes video markers and chapter titles.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefChapters" aria-labelledby="lbl-prefChapters" class="switch-input" />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefAudioLang">Audio Track</p>
+              <p data-i18n class="option-subtitle">Preferred audio language.</p>
+            </div>
+            <div class="custom-select-wrapper" id="prefAudioLangWrapper" data-searchable="true">
+              <button type="button" class="custom-select-trigger" id="prefAudioLangBtn">
+                <span id="prefAudioLangLabel">Auto</span>
+                <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="custom-select-menu hidden" id="prefAudioLangMenu">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefCaptions">Download Subtitles</p>
+              <p data-i18n class="option-subtitle">Downloads available subtitles along with the video.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefCaptions" aria-labelledby="lbl-prefCaptions" class="switch-input" />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="option-row bordered sub-row" data-requires="prefCaptions">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefSubMode">Subtitles Mode</p>
+              <p data-i18n class="option-subtitle">Choose how subtitles are saved.</p>
+            </div>
+            <div class="custom-select-wrapper" id="prefSubModeWrapper">
+              <button type="button" class="custom-select-trigger" id="prefSubModeBtn">
+                <span id="prefSubModeLabel">Embedded</span>
+                <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="custom-select-menu hidden" id="prefSubModeMenu">
+                <div class="custom-select-option selected" data-value="embedded">Embedded</div>
+                <div class="custom-select-option" data-value="separate">Separate</div>
+                <div class="custom-select-option" data-value="both">Both</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="option-row bordered sub-row" data-requires="prefCaptions prefSubMode=separate|both">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefSubFormat">Subtitles Format</p>
+              <p data-i18n class="option-subtitle">If subtitles mode is set to Separate or both.</p>
+            </div>
+            <div class="custom-select-wrapper" id="prefSubFormatWrapper">
+              <button type="button" class="custom-select-trigger" id="prefSubFormatBtn">
+                <span id="prefSubFormatLabel">.srt</span>
+                <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="custom-select-menu hidden" id="prefSubFormatMenu">
+                <div class="custom-select-option selected" data-value="srt">.srt</div>
+                <div class="custom-select-option" data-value="vtt">.vtt</div>
+                <div class="custom-select-option" data-value="lrc">.lrc</div>
+                <div class="custom-select-option" data-value="ass">.ass</div>
+                <div class="custom-select-option" data-value="json">.json</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="option-row bordered sub-row" data-requires="prefCaptions">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefSubLang">Subtitles Language</p>
+              <p data-i18n class="option-subtitle">Select your preferred subtitles language from those available in the video.</p>
+            </div>
+            <div class="custom-select-wrapper" id="prefSubLangWrapper" data-searchable="true">
+              <button type="button" class="custom-select-trigger" id="prefSubLangBtn">
+                <span id="prefSubLangLabel">Auto</span>
+                <svg class="custom-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="custom-select-menu hidden" id="prefSubLangMenu">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="option-row bordered sub-row" data-requires="prefCaptions">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefSubAuto">Auto-Generated Subtitles</p>
+              <p data-i18n class="option-subtitle">Use auto-generated subtitles as a fallback when manual subtitles are unavailable.</p>
+              <p data-i18n class="option-note">Note: Auto-generated subtitles may not always be accurate or reliable and may contain transcription errors.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefSubAuto" aria-labelledby="lbl-prefSubAuto" class="switch-input" checked />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title" id="lbl-prefEmbedThumb">Embed Thumbnails for Audio Files</p>
+              <p data-i18n class="option-subtitle">Embed the video thumbnail as cover artwork for supported audio files.</p>
+            </div>
+            <label class="switch-label">
+              <input type="checkbox" id="prefEmbedThumb" aria-labelledby="lbl-prefEmbedThumb" class="switch-input" />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- NETWORK &AMP; ACCESS TAB -->
+      <div id="tab-network" class="settings-section-panel">
+        
+      </div>
+
+      <!-- ADVANCED TAB -->
+      <div id="tab-advanced" class="settings-section-panel">
+        
+      </div>
+
+      <!-- IMPORT &AMP; EXPORT TAB -->
+      <div id="tab-importexport" class="settings-section-panel">
+        <div class="settings-group-card">
+          <div class="option-row">
+            <div>
+              <p data-i18n class="option-title">Export Configuration</p>
+              <p data-i18n class="option-subtitle">Save the current settings to a file for backup or later import.</p>
+            </div>
+            <button data-i18n type="button" id="exportConfigBtn" class="btn-secondary-action">Export Settings</button>
+          </div>
+
+          <div class="option-row bordered">
+            <div>
+              <p data-i18n class="option-title">Import Configuration</p>
+              <p data-i18n class="option-subtitle">Load a previously exported configuration.</p>
+            </div>
+            <button data-i18n type="button" id="importConfigBtn" class="btn-secondary-action">Import Settings</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MANAGE EXTENSIONS TAB -->
+      <div id="tab-extensions" class="settings-section-panel">
+        
+      </div>
+
+      <!-- HOTKEYS TAB -->
+      <div id="tab-hotkeys" class="settings-section-panel">
+        
+      </div>
+
+      <!-- ABOUT TAB -->
+      <div id="tab-about" class="settings-section-panel">
+        
+      </div>
+    </section>
+  </div>
+</div>
